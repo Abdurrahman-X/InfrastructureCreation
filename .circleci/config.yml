@@ -40,6 +40,6 @@ workflows:
   my-workflow:
     jobs:
       - create-infrastructure
-      - configure-infrastructure
-          requires: 
-            - create-infrastructure
+      - configure-infrastructure:
+          requires: [create-infrastructure]
+      
