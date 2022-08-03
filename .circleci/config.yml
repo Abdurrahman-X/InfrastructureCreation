@@ -13,8 +13,8 @@ commands:
     steps: 
       - run:
           name: Destroy Environment
-          when: on_fail
           command: aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:7}
+          when: on_fail
 
 jobs:
   create-infrastructure:
@@ -32,6 +32,7 @@ jobs:
       - run:
           name: Create Cloudformation Stack
           command: aws cloudformation deploy --template-file template.yml --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:7} --region us-east-1
+      - destroy-environment
   # Configure and Deploy
   configure-infrastructure:
     docker:
@@ -72,6 +73,7 @@ jobs:
         - run: 
             name: Test job
             command: return 1
+        
         - destroy-environment
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
