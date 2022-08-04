@@ -33,7 +33,7 @@ jobs:
 
    # Exercise: Promote to Production - Job 2
   # Fetch and save the pipeline ID (bucket ID) responsible for the last release.
-  get_last_deployment_id:
+  get-last-deployment-id:
     docker:
       - image: amazon/aws-cli
     steps:
